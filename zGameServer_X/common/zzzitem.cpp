@@ -1459,7 +1459,10 @@ void CItem::Convert(int type, BYTE Option1, BYTE Option2, BYTE Option3, BYTE Att
 	{
 		if ( SocketOption )
 		{
+			if( SocketBonusOption == 0xFF ) SocketBonusOption = 0x00;
+		
 			this->m_BonusSocketOption = SocketBonusOption;
+			
 			for ( i = 0; i < 5; ++i )
 			this->m_SocketOption[i] = SocketOption[i];
 		}
@@ -6001,7 +6004,7 @@ int CItem::LuckyItemArmorDurabilityDown(int damagemin, int aIndex)
 
 	if( this->m_DefenseOrigin == 0 )
 	{
-        LogAddTD("defL¦ 0L¦+-");
+        LogAddTD("defL?0L?-");
 		return 0;
 	}
 	

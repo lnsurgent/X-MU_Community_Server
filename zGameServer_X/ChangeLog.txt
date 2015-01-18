@@ -469,3 +469,105 @@
 [14.02.2014]
 1> [OffExp.cpp] Close Client Fix
 1> [PVPZone.cpp] Fix Cord Checker
+
+[18/06/2014]
+1>Fix Doppelganger [GS]
+ 
+[24/06/2014]
+1>Fix SD & AG Boost (Item Period) [GS]
+1>Fix Summon Monster ELF [GS]
+ 
+[30/06/2014]
+1>Fix New Wings Mix Fail [GS]
+1>Added 4thWings Mix File Config [GS]/[DATA/CUSTOM/CustomWing.cfg]
+ 
+[13/07/2014]
+1>Added Balance System PVP [GS]/[DATA/CUSTOM/BalanceSystem.ini]
+1>Added Item Option Attack Fenrir [GS]/[DATA/CUSTOM/ItemOption.ini]
+1>Fixed Character Create (AntiHack) [GS]
+1>Fixed Summoner Create Character Card [GS]
+1>Fixed Priest Devin Transparency [GS]
+1>Rewrite Doppelganger Error [GS]
+1>Rewrite Elf Summon Error [GS]
+1>Fixed Drop Zen 0 (zero) [GS]
+1>Added new Sphere Item [GS]/[Data/Local/Eng/Item_eng.bmd]/[Item.txt]/[Commonserver.cfg]
+1>Added New Summoner Set (Queen) [GS]/[Data/Local/Eng/Item_eng.bmd]/[Item.txt]
+1>Fixed DL Pet Leveling [GS]/[QUERY]
+1>Added LuckyItem In Trade [CommonServer.cfg]
+1>Added Windows 2003 Support [GS]
+1>Fixed Rage Fighter Create Character Card [GS]/[DATASERVER]/[QUERY]
+ 
+[25/07/2014]
+1>Fixed MEMB_STAT INFO [QUERY]
+1>Fixed RF Create Character Card [GS]/[DATASERVER]
+1>Fixed ItemToolTip QueenSet [DATA/LOCAL/(LANG)/ItemToolTip.bmd
+1>Fixed Mail System [GS]
+1>Fixed Illusion Temple [GS]
+1>Fixed DarkSide Skill Rewrite Full Func [GS]
+1>Fixed Illusion Temple Ranking [QUERY]
+1>Fixed Lucky Coin Register [QUERY] / [commonserver.cfg]
+1>Fixed ImperialGuardian Ranking [QUERY]
+1>Fixed Doppelganger Ranking [QUERY]
+ 
+[30/07/2014]
+1>New Wings Effect [zClient]
+1>ServerTime Added [zClient]/[DATA/CUSTOM/INTERFACE/TimeBoard.ozt
+1>Fix Golden Tantalos & Golden Lizard [GS]
+1>Fix Mercenary Guild Quest [DATA/Quest_Ep20.lua] (nao funciona o resto, precisa programar)
+1>Fix Illusion Temple File [DATA/EVENT/IllusionTemple.dat]/[TTLCI.dll]
+1>Fixed Kundun Monster Drop Item (Config File Added) [Commonserver.cfg]
+1>Added Gold Channel Ticket [GS]/[QUERY]/[zDataServer]
+1>Added Vip System like Original GMO [GS]/[zGameServer/Serverinfo.dat]
+1>Fixed Mini-Wings [GS]
+1>Added Relogin System [GS]/[zClient]
+ 
+[31/07/2014]
+1>Removed Gold Channel Ticket [GS]/[zDataServer]
+1>Encoder Added
+1>zClient Fix
+ 
+[08/08/2014]
+1>Fixed /makeitembyname GS Crash [GS]
+1>Fixed Time [GS]/[Time.ozt]/[zClient.dll]
+1>Fixed Item Name (ancient and socket) [TTLCI.DLL]/[zClient.dll]
+1>Remove LuckyItemTrade [GS]/[Commonserver.cfg]
+1>Fixed Create RF & Sum Level [GS]
+1>Fixed Pet Absorve Damage Percent [GS]
+1>Fixed Mercenary Guild Quest [GS]/[Lua] (thx webmonkey)
+1>Added MixOption System [GS]/[Data/Custom/MixOption.txt]
+1>Fixed Wing Mix Success Rate [GS]/[MixOption.txt]
+1>Main Server & Local Time Change [zClient.dll]
+1>Fixed Period Item Time [GS]
+ 
+[16/08/2014]
+1>Fixed Offtrade [GS]/[Custom/Offtrade.txt]/[zClient.dll] (thx very much webmonkey)
+1>Fixed Berseker skill complete [GS] (thx webmonkey)
+1>Added Soul in Offtrade [GS]
+1>Added wCoin in Offtrade [GS]
+1>Fixed Offtrade (added Delay) [GS]
+ 
+[26/08/2014]
+1>Fixed Offline Trade GS CRASH [GS]
+1>Offtrade fully completed "like" GMO [GS]
+1>Added ItemLuckDropPer Config [GS]/[Commonserver.cfg]
+1>Fixed Imperial Guardian TRAPS [GS]
+1>Fixed Imperial Guardian Message if no Party [GS]
+ 
+[19/09/2014]
+1>Fixed Account max leght 10 [GS]
+1>Added Config for Gold Channel [GS]/[Serverinfo.dat]/[VipSystemFolder]/[zDataServer]
+1>Added Config for AutoReconnect [GS]/[Custom/AutoReconnect.ini]
+ 
+[06/10/2014]
+1>Added Auto Start MuHelper [GS]/[AutoReconnect.ini]
+1>Fixed GameShop Max Package [GS]
+1>Added Bless,Chaos,Life,Creation in Offtrade [GS]/[Custom/Offtrade.txt]
+1>Added Discount Tax for wCoin method in offtrade [GS]/[Custom/Offtrade.txt]
+1>Added MuHelper Min Level Use [GS]/[zClient.dll]/[Commonserver.cfg]
+1>Fixed Kriss selling in shop cause client crash [zClient.dll]
+1>Added Custom Vip System in Same Server [GS]/[zDS]/[VipSystem/CustomVipSystem.ini]
+ 
+[14/10/2014]
+1>Fixed Vip Type Item Buy [GS]
+1>Fixed Tab key in login screen [zClient.dll]
+1>Changed Items to Mix lvl4 Wings [GS]/[zClient]/[Data/Custom/Item]/[mix.bmd]

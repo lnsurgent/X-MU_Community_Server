@@ -130,16 +130,6 @@ void Item::LoadModels()
 	pLoadModel(ITEM2(14, 182), Path, "JewelOfExcellent", -1);
 	pLoadModel(ITEM2(14, 183), Path, "JewelOfNature", -1);
 	pLoadModel(ITEM2(14, 184), Path, "JewelOfCurse", -1);
-
-#ifdef NEWITENSNNEWAGE
-	pLoadModel(ITEM2(14,186), Path, "ChannelCard1", -1);
-	pLoadModel(ITEM2(14,187), Path, "ChannelCard2", -1);
-	pLoadModel(ITEM2(14,188), Path, "ChannelCard3", -1);
-	pLoadModel(ITEM2(14,189), Path, "ChannelCard4", -1);
-	pLoadModel(ITEM2(14,190), Path, "ChannelCard5", -1);
-
-	pLoadModel(ITEM2(14,185), Path, "penalvl4", -1);
-#endif
 }
 // ----------------------------------------------------------------------------------------------
 
@@ -174,13 +164,6 @@ void Item::LoadTextures()
 	pLoadTexture(ITEM2(14, 182), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
 	pLoadTexture(ITEM2(14, 183), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
 	pLoadTexture(ITEM2(14, 184), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
-
-	pLoadTexture(ITEM2(14, 186), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
-	pLoadTexture(ITEM2(14, 187), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
-	pLoadTexture(ITEM2(14, 188), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
-	pLoadTexture(ITEM2(14, 189), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
-	pLoadTexture(ITEM2(14, 190), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
-	pLoadTexture(ITEM2(14, 185), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
 }
 // ----------------------------------------------------------------------------------------------
 

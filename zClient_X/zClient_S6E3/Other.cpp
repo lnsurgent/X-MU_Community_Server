@@ -193,7 +193,7 @@ int Other::GameLoad()
 		break;
 		// --
 	case 7:
-		pWinWidth		= 1366;
+		pWinWidth		= 1360;
 		pWinHeight		= 768;
 		break;
 		// --

@@ -30,8 +30,8 @@ Interface::Interface()
 
 Naked(CharacterInfoExtern)
 {
-	sprintf(CharacterInfoExtern_LevelBuff, "Level: %d | Reset: %d (%d)", 
-		gObjUser.lpPlayer->Level, gObjUser.m_Reset, gObjUser.m_GrandReset);
+	sprintf(CharacterInfoExtern_LevelBuff, "Level: %d | Reset: %d", 
+		gObjUser.lpPlayer->Level, gObjUser.m_Reset);
 	// ----
 	_asm
 	{
@@ -154,13 +154,10 @@ void Interface::Load()
 	this->BindObject(eNEWS_INFOBG, 0x787D, 170, 21, -1, -1);
 	this->BindObject(eNEWS_CLOSE, 0x7EC5, 36, 29, -1, -1);
 	this->BindObject(eNEWS_BACK, 0x7A5E, 128, 29, -1, -1);
-#ifdef __MAKELO__
-	this->BindObject(eOFFEXP_SWITCH, 32513, 57, 23, MAX_WIN_WIDTH-57, 0);
-#endif
-	//#ifdef __BEREZNUK__
 	this->BindObject(eTIME, 0x787E, 131, 70, -10, 359);
 	this->Data[eTIME].OnShow = true;
-	//#endif
+
+
 #ifdef __ROOT__
 	this->BindObject(eQUEST_MAIN, 0x7A5A, 222, 303, -1, -1);
 	this->BindObject(eQUEST_TITLE, 0x7A63, 230, 67, -1, -1);
@@ -190,19 +187,13 @@ void Interface::Work()
 {
 	gObjUser.Refresh();
 	gCamera.Rotate();
+	gCamera.Position();
 	// ----
-	//#if defined __BEREZNUK__ || __MIX__ || __REEDLAN__ || __MUANGEL__ || __WHITE__ || __MEGAMU__ || __VIRNET__
 	gConnectEx.Run();
-	//#endif
 #ifdef __NOVUS__
 	gInterface.DrawCraftWindow();
 #endif
-#ifdef __MAKELO__
-	gInterface.DrawOffExpSwitch();
-#endif
-	//#ifdef __BEREZNUK__
 	gInterface.DrawTime();
-	//#endif
 	// ----
 	gInterface.DrawLifeBar();
 	gInterface.DrawCameraUI();
@@ -223,7 +214,7 @@ void Interface::LoadImages()
 	pLoadImage("Custom\\Interface\\CameraUI_Reset.tga", 0x787C, 0x2601, 0x2900, 1, 0);
 	pLoadImage("Custom\\Interface\\NewsBoard_Title.tga", 0x787D, 0x2601, 0x2900, 1, 0);
 	//#ifdef __BEREZNUK__
-	//pLoadImage("Custom\\Interface\\TimeBar.tga", 0x787E, 0x2601, 0x2900, 1, 0);
+	pLoadImage("Custom\\Interface\\TimeBar.tga", 0x787E, 0x2601, 0x2900, 1, 0);
 	//#endif
 #ifdef __MAKELO__
 	pLoadImage("Interface\\newui_pcroom.tga", 32513, 0x2601, 0x2900, 1, 0);
@@ -1552,16 +1543,14 @@ void Interface::DrawTime()
 		return;
 	}
 	// ----
-	/*if( this->CheckWindow(ObjWindow::ChatWindow) || this->CheckWindow(ObjWindow::CashShop)
+	if( this->CheckWindow(ObjWindow::ChatWindow) || this->CheckWindow(ObjWindow::CashShop)
 	|| this->CheckWindow(ObjWindow::FullMap) || this->CheckWindow(ObjWindow::SkillTree)
-	|| this->CheckWindow(ObjWindow::MoveList) || gObjUser.m_MapNumber == 34 || gObjUser.m_MapNumber == 30 )*/
-	if(this->CheckWindow(ObjWindow::CashShop) || this->CheckWindow(ObjWindow::SkillTree)
-		|| this->CheckWindow(ObjWindow::MoveList))
+	|| this->CheckWindow(ObjWindow::MoveList) )
 	{
 		return;
 	}
 	// ----
-	//this->DrawGUI(eTIME, 0, -3);
+	this->DrawGUI(eTIME, this->Data[eTIME].X, this->Data[eTIME].Y);
 	// -----
 	time_t TimeServer, TimeLocal;
 	struct tm * ServerT, * LocalT;

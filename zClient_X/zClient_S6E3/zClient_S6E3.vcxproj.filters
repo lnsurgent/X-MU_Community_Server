@@ -88,8 +88,8 @@
     <Filter Include="Source Files\SocketItem">
       <UniqueIdentifier>{baa0bc1a-a245-4b43-832f-7427ac871902}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\CRC">
-      <UniqueIdentifier>{6f5e3d79-ed47-443d-b987-c31cfaabb56d}</UniqueIdentifier>
+    <Filter Include="Extern\VMProtect">
+      <UniqueIdentifier>{83edfdec-0849-47f5-9d52-a5479312ca84}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -195,8 +195,8 @@
     <ClInclude Include="SocketItem.h">
       <Filter>Source Files\SocketItem</Filter>
     </ClInclude>
-    <ClInclude Include="CRC.h">
-      <Filter>Source Files\CRC</Filter>
+    <ClInclude Include="VMProtectSDK.h">
+      <Filter>Extern\VMProtect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,9 +284,6 @@
     <ClCompile Include="SocketItem.cpp">
       <Filter>Source Files\SocketItem</Filter>
     </ClCompile>
-    <ClCompile Include="CRC.cpp">
-      <Filter>Source Files\CRC</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -297,5 +294,10 @@
     <None Include="icon1.ico">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="VMProtectSDK32.lib">
+      <Filter>Extern\VMProtect</Filter>
+    </Library>
   </ItemGroup>
 </Project>

@@ -37,7 +37,7 @@ void ItemRank::Read(char * File)
 	// ----
 	if( !g_ScriptEncode.ReadScript(File) )
 	{
-		MessageBoxA(NULL, "file not found", "[ItemRank]", ERROR);
+		MessageBox(NULL, "file not found", "[ItemRank]", ERROR);
 		return;
 	}
 	// ----

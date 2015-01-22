@@ -7,31 +7,32 @@
 #include "TrayMode.h"
 // ----------------------------------------------------------------------------------------------
 
-char recvbuf[100];
-char buf[100];
-
 CheatGuard gCheatGuard;
 // ----------------------------------------------------------------------------------------------
 
 void CheatGuard::Load()
 {
+	VMBEGIN
 	// ----
 	ZeroMemory(this->XOR, sizeof(XOR));
 	this->ChangeXORFilter();
 	// ----
+	VMEND
 }
 // ----------------------------------------------------------------------------------------------
 
 void CheatGuard::ChangeXORFilter()
 {
+	VMBEGIN
 	// ----
-	this->XOR[0]	= 0xfa;	this->XOR[1]	= 0x5a;	this->XOR[2]	= 0xcc;	this->XOR[3]	= 0x8a;	this->XOR[4]	= 0xf6;	this->XOR[5]	= 0x7a;	this->XOR[6]	= 0x9d;	this->XOR[7]	= 0x31;	this->XOR[8]	= 0x92;	this->XOR[9]	= 0x44;	this->XOR[10]	= 0xaa;	this->XOR[11]	= 0xae;	this->XOR[12]	= 0xaf;	this->XOR[13]	= 0xff; 	this->XOR[14]	= 0xfe;	this->XOR[15]	= 0xbb;	this->XOR[16]	= 0xab;	this->XOR[17]	= 0xba;	this->XOR[18]	= 0xb6;	this->XOR[19]	= 0xd;	this->XOR[20]	= 0x4;	this->XOR[21]	= 0x16;	this->XOR[22]	= 0x4d;	this->XOR[23]	= 0xae;	this->XOR[24]	= 0xec;	this->XOR[25]	= 0x7f;	this->XOR[26]	= 0xdf;	this->XOR[27]	= 0x1c;	this->XOR[28]	= 0x31;	this->XOR[29]	= 0xba;	this->XOR[30]	= 0xab;	this->XOR[31]	= 0x6a;
+	this->XOR[0]	= 0xf2;	this->XOR[1]	= 0xa5;	this->XOR[2]	= 0xb4;	this->XOR[3]	= 0x85;	this->XOR[4]	= 0xf5;	this->XOR[5]	= 0xa7;	this->XOR[6]	= 0xd9;	this->XOR[7]	= 0x38;	this->XOR[8]	= 0x92;	this->XOR[9]	= 0x01;	this->XOR[10]	= 0xee;	this->XOR[11]	= 0x11;	this->XOR[12]	= 0xd1;	this->XOR[13]	= 0x96;	this->XOR[14]	= 0xfe;	this->XOR[15]	= 0xfa;	this->XOR[16]	= 0xa5;	this->XOR[17]	= 0xda;	this->XOR[18]	= 0x2f;	this->XOR[19]	= 0xd1;	this->XOR[20]	= 0x44;	this->XOR[21]	= 0xf6;	this->XOR[22]	= 0x4c;	this->XOR[23]	= 0x20;	this->XOR[24]	= 0x91;	this->XOR[25]	= 0x74;	this->XOR[26]	= 0xdc;	this->XOR[27]	= 0x1d;	this->XOR[28]	= 0x37;	this->XOR[29]	= 0xbe;	this->XOR[30]	= 0xaf;	this->XOR[31]	= 0x6b;
 	// ----
 	for( int i = 0; i < 32; i++ )
 	{
 		SetByte((PVOID)((oXORFilterStart + 4 * i) + 3), this->XOR[i]);
 	}
 	// ----
+	VMEND
 }
 // ----------------------------------------------------------------------------------------------
 
@@ -74,6 +75,7 @@ int CheatGuard::GetLargerFrame()
 
 void CheatGuard::Check(CHEATGUARD_REQ_CHECK * pRequest)
 {
+	VMBEGIN
 	// ----
 	gObjUser.Refresh();
 	// ----
@@ -158,82 +160,6 @@ void CheatGuard::Check(CHEATGUARD_REQ_CHECK * pRequest)
 		}
 	}
 	// ----
+	VMEND
 }
 // ----------------------------------------------------------------------------------------------
-
-void ConnectToServer(void)
-{
-	int ConnectDone;
-	ConnectDone = ServerConnect();
-}
-
-int ServerConnect ()
-{
-	WORD		wVersionRequested;
-	WSADATA		wsaData;
-	SOCKADDR_IN target; //Socket address information
-	SOCKET		s;
-	int			err;
-	int			bytesSent;
-	int			TryToConnect;
-	char*		ptTime;
-	char		tTime[12];
-
-
-	wVersionRequested = MAKEWORD( 1, 1 );
-	err = WSAStartup( wVersionRequested, &wsaData );
-
-	if ( err != 0 ) {
-		//printf("WSAStartup error %ld", WSAGetLastError() );
-		WSACleanup();
-		return false;
-	}
-	//------------------------------------------------------
-
-	//---- Build address structure to bind to socket.--------  
-	target.sin_family = AF_INET; // address family Internet
-	target.sin_port = htons (55696); //Port to connect on
-	target.sin_addr.s_addr = inet_addr ("192.168.1.100"); //Target IP
-	//--------------------------------------------------------
-
-
-	// ---- create SOCKET--------------------------------------
-	s = socket (AF_INET, SOCK_STREAM, IPPROTO_TCP); //Create socket
-	if (s == INVALID_SOCKET)
-	{
-		//printf("socket error %ld" , WSAGetLastError() );
-		WSACleanup();
-		return false; //Couldn't create the socket
-	}  
-	//---------------------------------------------------------
-
-
-	//---- try CONNECT -----------------------------------------
-	for(TryToConnect=0;TryToConnect<=10;TryToConnect++)
-	{
-		if (connect(s, (SOCKADDR *)&target, sizeof(target)) == SOCKET_ERROR)
-		{
-
-			//printf("connect error %ld", WSAGetLastError() );
-			//printf("attempt to connect #%d to Anti-Hack Server \n",TryToConnect+1);
-			Sleep(500);
-			if (TryToConnect == 10)
-			{
-				WSACleanup();
-				return false; //Couldn't connect
-			}
-		}
-		else
-			break;
-	}
-	//-----------------------------------------------------------
-
-	//---- SEND bytes -------------------------------------------
-
-	wsprintf(buf+1, "protectSend");
-	bytesSent = send( s, buf, 100, 0 ); 
-	
-	closesocket( s );
-	WSACleanup();
-	return (0);
-}

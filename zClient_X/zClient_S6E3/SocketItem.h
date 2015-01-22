@@ -1,9 +1,7 @@
 #include "stdafx.h"
 
-#ifdef _SOCKET_CONFIG_
-
 #define MAX_ITEM 7680
-
+#ifdef __LOL__
 class cSocketItem
 {
 public:

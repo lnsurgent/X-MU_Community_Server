@@ -190,36 +190,6 @@ Naked(AddWingsEffect)
 			Color[1] = 0.0;
 			Color[2] = 0.2;
 		}
-		else if( AddWingsEffect_Buff == ITEM2(12, 186) )
-		{
-			Color[0] = 0.9;
-			Color[1] = 0.0;
-			Color[2] = 0.2;
-		}
-		else if( AddWingsEffect_Buff == ITEM2(12, 186) )
-		{
-			Color[0] = 0.9;
-			Color[1] = 0.0;
-			Color[2] = 0.2;
-		}
-		else if( AddWingsEffect_Buff == ITEM2(12, 186) )
-		{
-			Color[0] = 0.9;
-			Color[1] = 0.0;
-			Color[2] = 0.2;
-		}
-		else if( AddWingsEffect_Buff == ITEM2(12, 186) )
-		{
-			Color[0] = 0.9;
-			Color[1] = 0.0;
-			Color[2] = 0.2;
-		}
-		else if( AddWingsEffect_Buff == ITEM2(12, 186) )
-		{
-			Color[0] = 0.9;
-			Color[1] = 0.0;
-			Color[2] = 0.2;
-		}
 		// ----
 		pAllowStaticEffect(F1_This, &F1_Arg11, F1_Arg2, 1, 0);
 		pPlayStaticEffect(0x7D02, &F1_Arg11, 8.0, Color, F2_Arg5, 0.0, 0);
@@ -403,8 +373,8 @@ void ItemAsmLoad()
 	SetRange((LPVOID)0x00876E48, 8, ASM::NOP);
 	SetOp((LPVOID)0x00876E48, WingsFixMoveKanturu, ASM::JMP);
 	// ----
-	SetRange((LPVOID)0x005666F7, 10, ASM::NOP);
-	SetOp((LPVOID)0x005666F7, AddWingsEffect, ASM::JMP);
+	//SetRange((LPVOID)0x005666F7, 10, ASM::NOP);
+	//SetOp((LPVOID)0x005666F7, AddWingsEffect, ASM::JMP);
 	// ----
 	SetRange((LPVOID)0x00838358, 9, ASM::NOP);
 	SetOp((LPVOID)0x00838358, FixWingsJewelsInsert, ASM::JMP);

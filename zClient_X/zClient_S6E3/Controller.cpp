@@ -129,7 +129,6 @@ LRESULT Controller::Keyboard(int Code, WPARAM wParam, LPARAM lParam)
 			}
 			break;
 			// --
-
 		case VK_END:
 			{
 				gInterface.SwitchTime();

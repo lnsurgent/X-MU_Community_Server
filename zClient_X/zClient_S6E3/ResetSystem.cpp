@@ -43,7 +43,7 @@ void ResetSystem::ReadGroupData(char * File)
 	// ----
 	if( !g_ScriptEncode.ReadScript(File) )
 	{
-		MessageBoxA(NULL, "file not found", "[ResetSystem]", ERROR);
+		MessageBox(NULL, "file not found", "[ResetSystem]", ERROR);
 		return;
 	}
 	// ----

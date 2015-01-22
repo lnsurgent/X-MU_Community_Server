@@ -30,16 +30,15 @@ Interface::Interface()
 
 Naked(CharacterInfoExtern)
 {
-	sprintf(CharacterInfoExtern_LevelBuff, "Level: %d | Reset: %d", 
-		gObjUser.lpPlayer->Level, gObjUser.m_Reset);
+	sprintf(CharacterInfoExtern_LevelBuff, "Level: %d | Reset: %d", gObjUser.lpPlayer->Level, gObjUser.m_Reset);
 	// ----
 	_asm
 	{
 		lea eax, CharacterInfoExtern_LevelBuff
-			push eax
-			// ----
-			mov CharacterInfoExtern_Buff, 0x0077FB85
-			jmp CharacterInfoExtern_Buff
+		push eax
+		// ----
+		mov CharacterInfoExtern_Buff, 0x0077FB85
+		jmp CharacterInfoExtern_Buff
 	}
 }
 // ----------------------------------------------------------------------------------------------
@@ -54,17 +53,13 @@ Naked(StaffNameColor)
 	// ----
 	StaffNameColor_lpView = &*(ObjectPreview*)(*(DWORD*)(StaffNameColor_Buff + 668));
 	// ----
-	if( !strncmp(StaffNameColor_lpView->Name, "NaM4", 4) )
+	if( !strncmp(StaffNameColor_lpView->Name, "[EM]", 4) )
 	{
 		pSetTextColor(pTextThis(), 255, 60, 160, 255);
 	}
 	else if( !strncmp(StaffNameColor_lpView->Name, "Admin", 5) )
 	{
 		pSetTextColor(pTextThis(), 255, 175, 0, 255);
-	}
-	else if( !strncmp(StaffNameColor_lpView->Name, "RFZIN", 5) )
-	{
-		pSetTextColor(pTextThis(), 0, 175, 0, 255);
 	}
 	else
 	{
@@ -74,7 +69,7 @@ Naked(StaffNameColor)
 	_asm
 	{
 		mov StaffNameColor_Buff, 0x00598C9A
-			jmp StaffNameColor_Buff
+		jmp StaffNameColor_Buff
 	}
 }
 // ----------------------------------------------------------------------------------------------
@@ -93,7 +88,7 @@ Naked(AddSomeShine)
 		_asm
 		{
 			mov AddSomeShine_Buff, 0x005E4979
-				jmp AddSomeShine_Buff
+			jmp AddSomeShine_Buff
 		}
 	}
 	else
@@ -101,7 +96,7 @@ Naked(AddSomeShine)
 		_asm
 		{
 			mov AddSomeShine_Buff, 0x005E4A3C
-				jmp AddSomeShine_Buff
+			jmp AddSomeShine_Buff
 		}
 	}
 }
@@ -156,7 +151,7 @@ void Interface::Load()
 	this->BindObject(eNEWS_BACK, 0x7A5E, 128, 29, -1, -1);
 	this->BindObject(eTIME, 0x787E, 131, 70, -10, 359);
 	this->Data[eTIME].OnShow = true;
-
+	this->BindObject(eOFFEXP_SWITCH, 32513, 57, 23, MAX_WIN_WIDTH-57, 0);
 
 #ifdef __ROOT__
 	this->BindObject(eQUEST_MAIN, 0x7A5A, 222, 303, -1, -1);
@@ -174,12 +169,12 @@ void Interface::Load()
 	SetOp((LPVOID)0x00633FFB, this->LoadModels, ASM::CALL);
 	SetRange((LPVOID)0x0077FB7E, 7, ASM::NOP);
 	SetOp((LPVOID)0x0077FB7E, (LPVOID)CharacterInfoExtern, ASM::JMP);
-	//#ifdef __NOVUS__
+#ifdef __NOVUS__
 	SetRange((LPVOID)0x00598C7D, 29, ASM::NOP);
 	SetOp((LPVOID)0x00598C7D, (LPVOID)StaffNameColor, ASM::JMP);
 	SetRange((LPVOID)0x005E496C, 13, ASM::NOP);
 	SetOp((LPVOID)0x005E496C, (LPVOID)AddSomeShine, ASM::JMP);
-	//#endif
+#endif
 }
 // ----------------------------------------------------------------------------------------------
 
@@ -190,18 +185,15 @@ void Interface::Work()
 	gCamera.Position();
 	// ----
 	gConnectEx.Run();
-#ifdef __NOVUS__
-	gInterface.DrawCraftWindow();
-#endif
+//	gInterface.DrawCraftWindow();
+//	gInterface.DrawOffExpSwitch();
 	gInterface.DrawTime();
 	// ----
 	gInterface.DrawLifeBar();
 	gInterface.DrawCameraUI();
 	gInterface.DrawResetWindow();
 	gInterface.DrawNewsWindow();
-#ifdef __RMOS__
-	gInterface.DrawQuestDialog();
-#endif
+//	gInterface.DrawQuestDialog();
 	// ----
 	pDrawInterface();
 }
@@ -213,12 +205,8 @@ void Interface::LoadImages()
 	pLoadImage("Custom\\Interface\\CameraUI_Switch.tga", 0x787B, 0x2601, 0x2900, 1, 0);
 	pLoadImage("Custom\\Interface\\CameraUI_Reset.tga", 0x787C, 0x2601, 0x2900, 1, 0);
 	pLoadImage("Custom\\Interface\\NewsBoard_Title.tga", 0x787D, 0x2601, 0x2900, 1, 0);
-	//#ifdef __BEREZNUK__
+//	pLoadImage("Interface\\newui_pcroom.tga", 32513, 0x2601, 0x2900, 1, 0);
 	pLoadImage("Custom\\Interface\\TimeBar.tga", 0x787E, 0x2601, 0x2900, 1, 0);
-	//#endif
-#ifdef __MAKELO__
-	pLoadImage("Interface\\newui_pcroom.tga", 32513, 0x2601, 0x2900, 1, 0);
-#endif
 	// ----
 	pLoadSomeForm();
 }
@@ -550,7 +538,7 @@ void Interface::EventOffExpSwitch(DWORD Event)
 		||  this->CheckWindow(Guild)
 		||  this->CheckWindow(GensInfo) 
 		|| gObjUser.lpViewPlayer->InSafeZone )
-
+		
 	{
 		return;
 	}
@@ -716,12 +704,12 @@ void Interface::FillCraftTab2()
 	if( gObjUser.lpPlayer->Level < gCraftSystem.m_StageData[gObjUser.m_CraftStage].ReqLevel )
 	{
 		this->DrawFormat(eRed, StartX + 30, 225, 210, 1, "- %d (Your: %d)",
-			gCraftSystem.m_StageData[gObjUser.m_CraftStage].ReqLevel, gObjUser.lpPlayer->Level);
+		gCraftSystem.m_StageData[gObjUser.m_CraftStage].ReqLevel, gObjUser.lpPlayer->Level);
 	}
 	else
 	{
 		this->DrawFormat(eWhite, StartX + 30, 225, 210, 1, "- %d",
-			gCraftSystem.m_StageData[gObjUser.m_CraftStage].ReqLevel);
+		gCraftSystem.m_StageData[gObjUser.m_CraftStage].ReqLevel);
 	}
 	// ----
 	this->DrawFormat(eGold, StartX + 30, 240, 210, 1, "Required Reset:");
@@ -729,12 +717,12 @@ void Interface::FillCraftTab2()
 	if( gObjUser.m_Reset < gCraftSystem.m_StageData[gObjUser.m_CraftStage].ReqReset )
 	{
 		this->DrawFormat(eRed, StartX + 30, 250, 210, 1, "- %d (Your: %d)",
-			gCraftSystem.m_StageData[gObjUser.m_CraftStage].ReqReset, gObjUser.m_Reset);
+		gCraftSystem.m_StageData[gObjUser.m_CraftStage].ReqReset, gObjUser.m_Reset);
 	}
 	else
 	{
 		this->DrawFormat(eWhite, StartX + 30, 250, 210, 1, "- %d",
-			gCraftSystem.m_StageData[gObjUser.m_CraftStage].ReqReset);
+		gCraftSystem.m_StageData[gObjUser.m_CraftStage].ReqReset);
 	}
 	// ----
 	this->DrawFormat(eGold, StartX + 30, 265, 210, 1, "Required Items:");
@@ -1068,12 +1056,12 @@ void Interface::DrawResetWindow()
 	if( gObjUser.lpPlayer->Level < gResetSystem.m_GroupData[gResetSystem.GetResetGroup()].ReqLevel )
 	{
 		this->DrawFormat(eRed, StartX + 30, 225, 210, 1, "- %d (Your: %d)",
-			gResetSystem.m_GroupData[gResetSystem.GetResetGroup()].ReqLevel, gObjUser.lpPlayer->Level);
+		gResetSystem.m_GroupData[gResetSystem.GetResetGroup()].ReqLevel, gObjUser.lpPlayer->Level);
 	}
 	else
 	{
 		this->DrawFormat(eWhite, StartX + 30, 225, 210, 1, "- %d",
-			gResetSystem.m_GroupData[gResetSystem.GetResetGroup()].ReqLevel);
+		gResetSystem.m_GroupData[gResetSystem.GetResetGroup()].ReqLevel);
 	}
 	// ----
 	this->DrawFormat(eGold, StartX + 30, 240, 210, 1, "Required Items:");
@@ -1544,8 +1532,8 @@ void Interface::DrawTime()
 	}
 	// ----
 	if( this->CheckWindow(ObjWindow::ChatWindow) || this->CheckWindow(ObjWindow::CashShop)
-	|| this->CheckWindow(ObjWindow::FullMap) || this->CheckWindow(ObjWindow::SkillTree)
-	|| this->CheckWindow(ObjWindow::MoveList) )
+		|| this->CheckWindow(ObjWindow::FullMap) || this->CheckWindow(ObjWindow::SkillTree)
+		|| this->CheckWindow(ObjWindow::MoveList) || gObjUser.m_MapNumber == 34 || gObjUser.m_MapNumber == 30 )
 	{
 		return;
 	}
@@ -1561,8 +1549,7 @@ void Interface::DrawTime()
 	// ----
 	char ServerTimeName[25] = "Server:";
 	char ServerTime[30];
-
-	sprintf(ServerTime, "%2d:%02d:%02d", (ServerT->tm_hour)%24, ServerT->tm_min, ServerT->tm_sec);
+	sprintf(ServerTime, "%2d:%02d:%02d", (ServerT->tm_hour+4)%24, ServerT->tm_min, ServerT->tm_sec);
 	// -----
 	LocalT = localtime(&TimeLocal); 
 	// -----
@@ -1570,11 +1557,11 @@ void Interface::DrawTime()
 	char LocalTime[30];
 	sprintf(LocalTime, "%2d:%02d:%02d", LocalT->tm_hour, LocalT->tm_min, LocalT->tm_sec);
 	// -----
-	this->DrawFormat(eGold, 20, 17, 50, 1, ServerTimeName);
-	this->DrawFormat(eWhite, 42, 17, 100, 1, ServerTime);
+	this->DrawFormat(eGold, 5, 391, 50, 1, ServerTimeName);
+	this->DrawFormat(eWhite, 55, 391, 100, 1, ServerTime);
 	// ----
-	this->DrawFormat(eGold, 70, 17, 50, 1, LocalTimeName);
-	this->DrawFormat(eWhite, 90, 17, 100, 1, LocalTime);
+	this->DrawFormat(eGold, 5, 413, 50, 1, LocalTimeName);
+	this->DrawFormat(eWhite, 55, 413, 100, 1, LocalTime);
 }
 // ----------------------------------------------------------------------------------------------
 

@@ -295,7 +295,7 @@ void Monster::SetMainAttribute(int ObjectPointer, int MonsterID)
 	case 492:	//-> Moss
 		//-> 일반 몬스터 NPC
 	case 522:	//-> Jerint the Assistant
-	case 523://-> 도플갱어 몬스터 NPC
+		//-> 도플갱어 몬스터 NPC
 	case 540:	//-> Lugard
 	case 541:	//-> Interim Reward Chest
 	case 542:	//-> Final Reward Chest

@@ -28,14 +28,12 @@ void Item::Load()
 	SetOp((LPVOID)0x5C2117, this->GetPrice, ASM::CALL);
 	SetOp((LPVOID)0x5C4268, this->GetPrice, ASM::CALL);
 	SetOp((LPVOID)0x7AF806, this->GetPrice, ASM::CALL);
-	//Fix Kriss Shop
-	/*SetOp((LPVOID)0x7E42F9, this->GetPrice, ASM::CALL);
+	SetOp((LPVOID)0x7E42F9, this->GetPrice, ASM::CALL);
 	SetOp((LPVOID)0x7E4347, this->GetPrice, ASM::CALL);
 	SetOp((LPVOID)0x7E439C, this->GetPrice, ASM::CALL);
-	SetOp((LPVOID)0x8475C3, this->GetPrice, ASM::CALL);*/
-	//Fim
 	SetOp((LPVOID)0x846B99, this->GetPrice, ASM::CALL);
 	SetOp((LPVOID)0x846C13, this->GetPrice, ASM::CALL);
+	SetOp((LPVOID)0x8475C3, this->GetPrice, ASM::CALL);
 	SetOp((LPVOID)0x9683D0, this->GetPrice, ASM::CALL);
 	// ----
 	SetOp((LPVOID)0x83476C, this->IsExpensiveItem, ASM::CALL);
@@ -99,7 +97,6 @@ void Item::LoadModels()
 	char * Path	= "Data\\Custom\\Item\\";
 	// ----
 #ifdef NEWWINGS
-//#ifdef __MEGAMU__
 	pLoadModel(ITEM2(12, 180), Path, "Wings1", -1);
 	pLoadModel(ITEM2(12, 181), Path, "Wings2", -1);
 	pLoadModel(ITEM2(12, 182), Path, "Wings3", -1);
@@ -114,15 +111,6 @@ void Item::LoadModels()
 	pLoadModel(ITEM2(12, 191), Path, "Wings12", -1);
 	pLoadModel(ITEM2(12, 192), Path, "Wings13", -1);
 	pLoadModel(ITEM2(12, 193), Path, "Wings14", -1);
-//#else
-//	pLoadModel(ITEM2(12, 180), Path, "WingsOfWizardry", -1);
-//	pLoadModel(ITEM2(12, 181), Path, "WingsOfGreatDragon", -1);
-//	pLoadModel(ITEM2(12, 182), Path, "WingsOfNature", -1);
-//	pLoadModel(ITEM2(12, 183), Path, "WingsOfReign", -1);
-//	pLoadModel(ITEM2(12, 184), Path, "WingsOfChaotic", -1);
-//	pLoadModel(ITEM2(12, 185), Path, "WingsOfLilium", -1);
-//	pLoadModel(ITEM2(12, 186), Path, "WingsOfMonarh", -1);
-//#endif
 #endif
 	// ----
 	pLoadModel(ITEM2(14, 180), Path, "JewelOfLuck", -1);
@@ -148,7 +136,6 @@ void Item::LoadTextures()
 	pLoadTexture(ITEM2(12, 184), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
 	pLoadTexture(ITEM2(12, 185), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
 	pLoadTexture(ITEM2(12, 186), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
-#ifdef __MEGAMU__
 	pLoadTexture(ITEM2(12, 187), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
 	pLoadTexture(ITEM2(12, 188), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
 	pLoadTexture(ITEM2(12, 189), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
@@ -156,7 +143,6 @@ void Item::LoadTextures()
 	pLoadTexture(ITEM2(12, 191), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
 	pLoadTexture(ITEM2(12, 192), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
 	pLoadTexture(ITEM2(12, 193), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
-#endif
 #endif
 	// ----
 	pLoadTexture(ITEM2(14, 180), Path, GL_REPEAT, GL_NEAREST, GL_TRUE);
@@ -178,11 +164,7 @@ bool Item::IsCustomWings(WORD ItemID, bool Preview)
 		ItemID -= ITEM_INTER;
 	}
 	// ----
-#ifdef __MEGAMU__
 	if( ItemID >= ITEM(12, 180) && ItemID <= ITEM(12, 193) )
-#else
-	if( ItemID >= ITEM(12, 180) && ItemID <= ITEM(12, 186) )
-#endif
 	{
 		return true;
 	}
@@ -298,10 +280,6 @@ bool Item::IsExpensiveItem(ObjectItem * lpItem)
 		return true;
 	}
 	// ----
-	if(gItem.IsCustomWings(lpItem->ItemID, false))
-	{
-		return true;
-	}
 	return pIsExpensiveItem(lpItem);
 }
 // ----------------------------------------------------------------------------------------------
@@ -364,11 +342,7 @@ void Item::PreviewCharSet(int ObjectIndex, BYTE * CharSet, lpViewObj Object, int
 		lpObj = Object;
 	}
 	// ----
-#ifdef __MEGAMU__
 	BYTE CustomWings = CharSet[16] >> 2;
-#else
-	BYTE CustomWings = CharSet[16] >> 2 & 7;
-#endif
 	// ----
 	if( CustomWings > 0 )
 	{
@@ -541,7 +515,6 @@ void Item::SetOption(ObjectItem * lpItem, BYTE Option, BYTE Special, BYTE Value)
 			}
 			break;
 			// --
-#ifdef __MEGAMU__
 		case ITEM(12, 187):	//-> DW
 			{
 				if( GET_ITEMOPT_4(Special) )
@@ -636,7 +609,6 @@ void Item::SetOption(ObjectItem * lpItem, BYTE Option, BYTE Special, BYTE Value)
 				}
 			}
 			break;
-#endif
 		}
 	}
 }
@@ -646,7 +618,6 @@ void Item::SetOptionText(int ItemID, int Line, WORD OptionID, bool Arg4, int Arg
 {
 	pSetItemOptionText(ItemID, Line, OptionID, Arg4, Arg5);
 	// ----
-#ifdef __RMOS__
 	if( !g_ItemRank.IsRankItem(ItemID) )
 	{
 		return;
@@ -658,32 +629,59 @@ void Item::SetOptionText(int ItemID, int Line, WORD OptionID, bool Arg4, int Arg
 		pSetItemTextLine(Line, "Increase Max HP +%d%%",
 			g_ItemRank.GetValue(ItemID, 0));
 		break;
+	case eItemOption::ExcellentDamage:
+		pSetItemTextLine(Line, "Excellent Damage rate +%d%%",
+			g_ItemRank.GetValue(ItemID, 0));
+		break;
 	case eItemOption::ManaIncrease:
 		pSetItemTextLine(Line, "Increase Max Mana +%d%%",
+			g_ItemRank.GetValue(ItemID, 1));
+		break;
+	case eItemOption::DamageByLevel	:
+		pSetItemTextLine(Line, "Increase Damage +level/%d",
+			g_ItemRank.GetValue(ItemID, 1));
+		break;
+	case eItemOption::IncreaseWizardry:
+		pSetItemTextLine(Line, "Increase Wizardry Dmg +level/%d",
 			g_ItemRank.GetValue(ItemID, 1));
 		break;
 	case eItemOption::DamageDecrease:
 		pSetItemTextLine(Line, "Damage Decrease +%d%%",
 			g_ItemRank.GetValue(ItemID, 2));
 		break;
-	case eItemOption::IncreaseWizardry:
-		pSetItemTextLine(Line, "Increase Wizardry Dmg +level/%d",
-			g_ItemRank.GetValue(ItemID, 3));
+	case eItemOption::IncreaseDamage:
+		pSetItemTextLine(Line, "Increase Damage +%d%%",
+			g_ItemRank.GetValue(ItemID, 2));
+		break;
+	case eItemOption::IncreaseWizardryDmg:
+		pSetItemTextLine(Line, "Increase Wizardry Dmg +%d%%",
+			g_ItemRank.GetValue(ItemID, 2));
 		break;
 	case eItemOption::Reflect:
 		pSetItemTextLine(Line, "Reflect Damage +%d%%",
+			g_ItemRank.GetValue(ItemID, 3));
+		break;
+	case eItemOption::IncreaseSpeed:
+		pSetItemTextLine(Line, "Increase Attacking(Wizardy)speed +%d",
 			g_ItemRank.GetValue(ItemID, 3));
 		break;
 	case eItemOption::DefenseSuccess:
 		pSetItemTextLine(Line, "Defense success rate +%d%%",
 			g_ItemRank.GetValue(ItemID, 4));
 		break;
+	case eItemOption::LifePerMob:
+		pSetItemTextLine(Line, " Increases acquisition rate of Life after hunting monsters +life/%d",
+			g_ItemRank.GetValue(ItemID, 4));
+		break;
 	case eItemOption::IncreaseZen:
 		pSetItemTextLine(Line, "Increases acquisition rate of Zen after hunting monsters +%d%%",
 			g_ItemRank.GetValue(ItemID, 5));
 		break;
+	case eItemOption::ManaPerMob:
+		pSetItemTextLine(Line, "Increases acquisition rate of Mana after hunting monsters +Mana/%d",
+			g_ItemRank.GetValue(ItemID, 5));
+		break;
 	}
-#endif
 }
 // ----------------------------------------------------------------------------------------------
 

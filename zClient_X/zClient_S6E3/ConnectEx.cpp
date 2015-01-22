@@ -6,7 +6,6 @@
 #include "Protocol.h"
 #include "User.h"
 #include "Interface.h"
-#include "CheatGuard.h"
 // ----------------------------------------------------------------------------------------------
 
 ConnectEx gConnectEx;
@@ -26,7 +25,7 @@ Naked(GetAccountInfo)
 	{
 		lea ecx, [ebp-0x18]
 		mov GetAccountInfo_Buff, ecx
-			lea ecx, [ebp-0x30]
+		lea ecx, [ebp-0x30]
 		mov GetAccountInfo_Buff2, ecx
 	}
 	// ----
@@ -37,7 +36,7 @@ Naked(GetAccountInfo)
 	_asm
 	{
 		mov GetAccountInfo_Buff, 0x0040B90D
-			jmp GetAccountInfo_Buff
+		jmp GetAccountInfo_Buff
 	}
 }
 // ----------------------------------------------------------------------------------------------
@@ -63,14 +62,14 @@ Naked(DisconnectEvent)
 		_asm
 		{
 			mov DisconnectEvent_Buff, 0x004D038B
-				jmp DisconnectEvent_Buff
+			jmp DisconnectEvent_Buff
 		}
 	}
 	// ----
 	_asm
 	{
 		mov DisconnectEvent_Buff, 0x004D0430
-			jmp DisconnectEvent_Buff
+		jmp DisconnectEvent_Buff
 	}
 }
 // ----------------------------------------------------------------------------------------------
@@ -82,7 +81,7 @@ Naked(MenuExit)
 	_asm
 	{
 		mov MenuExit_Buff, 0x007A88AD
-			jmp MenuExit_Buff
+		jmp MenuExit_Buff
 	}
 }
 // ----------------------------------------------------------------------------------------------
@@ -118,7 +117,7 @@ void ConnectEx::Run()
 		return;
 	}
 	// ----
-#ifdef __MUANGEL__
+//#ifdef __MUANGEL__
 	if( !this->m_ReconnectTick )
 	{
 		this->m_ReconnectTick = GetTickCount();
@@ -129,7 +128,7 @@ void ConnectEx::Run()
 		this->m_ConnectState = ConnectExType::OnForceDisconnect;
 		ExitProcess(0);
 	}
-#endif
+//#endif
 	// ----
 	this->ClearGame();
 	this->DrawProgres();
@@ -185,9 +184,9 @@ void ConnectEx::ClearGame()
 
 void ConnectEx::RestoreGame()
 {
-#ifdef __MUANGEL__
+//#ifdef __MUANGEL__
 	this->m_ReconnectTick	= 0;
-#endif
+//#endif
 	// ----
 	this->m_LastSendTick	= 0;
 	this->m_ConnectState	= ConnectExType::OnLine;
@@ -241,7 +240,6 @@ void ConnectEx::Reconnect()
 
 void ConnectEx::Relogin()
 {
-	//ConnectToServer();
 	CONNECTEX_LOGIN pRequest;
 	pRequest.h.set((LPBYTE)&pRequest, 0xFB, 12, sizeof(CONNECTEX_LOGIN));
 	memcpy(pRequest.AccountID, this->m_AccountID, 10);

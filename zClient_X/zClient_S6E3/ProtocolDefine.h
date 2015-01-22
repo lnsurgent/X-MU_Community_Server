@@ -156,11 +156,5 @@ struct PMSG_DEFAULT2
 	PBMSG_HEAD h;
 	BYTE subcode;
 };
-
-struct MAIN_CHECKSUM_SEND
-{
-	PBMSG_HEAD2 h;
-	int checksum;
-};
 #pragma pack(pop)
 // ----------------------------------------------------------------------------------------------

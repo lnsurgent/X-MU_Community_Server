@@ -41,7 +41,7 @@ void ItemPrice::ReadList(char * File)
 	// ----
 	if( !g_ScriptEncode.ReadScript(File) )
 	{
-		MessageBoxA(NULL, "file not found", "[ItemPrice]", ERROR);
+		MessageBox(NULL, "file not found", "[ItemPrice]", ERROR);
 		return;
 	}
 	// ----

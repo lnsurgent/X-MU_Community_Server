@@ -1,20 +1,19 @@
 #include "stdafx.h"
 
-#ifdef _SOCKET_CONFIG_
 
 #include "SocketItem.h"
 #include "ReadScript.h"
 #include "TMemory.h"
-
+#ifdef __LOL__
 cSocketItem gSocketItem;
 
 void cSocketItem::Load()
 {
-	SMDFile = fopen("Data\\Custom\\Item\\SocketItem.bmd", "r");
+	SMDFile = fopen("Data\\Custom\\SocketItem.ini", "r");
 
 	if ( SMDFile == NULL )
 	{
-		MessageBoxA(0,"Data\\Custom\\Item\\SocketItem.bmd","CRITICAL ERROR",0);
+		MessageBoxA(0,"Data\\Custom\\SocketItem.ini","CRITICAL ERROR",0);
 		ExitProcess(1);
 		return;
 	}
@@ -85,5 +84,4 @@ int cSocketItem::CheckItem(signed int ItemCode)
 	}
 	return 0;
 }
-
 #endif

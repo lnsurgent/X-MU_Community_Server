@@ -27,8 +27,9 @@ extern "C" __declspec(dllexport)void Init()
 	// ----
 	DWORD OldProtect;
 	// ----
-	if (VirtualProtect(LPVOID(0x401000), 0xD21FFF, PAGE_EXECUTE_READWRITE, &OldProtect))
+	if(VirtualProtect(LPVOID(0x401000),0xD21FFF,PAGE_EXECUTE_READWRITE,&OldProtect))
 	{
+		gConnectEx.Load();
 		gController.Load();
 		gChatExpanded.Load();
 		gItemPrice.Load();
@@ -42,12 +43,12 @@ extern "C" __declspec(dllexport)void Init()
 		gVisualFix.InitVisualFix();
 		g_ItemModel.Load();
 		gOffTrade.Init();
+	//	g_ItemRank.Load();
+	//	gCraftSystem.Load();
+	//	gSocketItem.Load();
 		// ----
 		LoadLibrary("ttlci.dll");
 		// ----
-	//	gCraftSystem.Load();
-	//	g_ItemRank.Load();
-	//	gSocketItem.Load();
 	}
 	VMEND
 }

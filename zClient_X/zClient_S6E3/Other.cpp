@@ -8,7 +8,7 @@
 #include "Interface.h"
 #include "Camera.h"
 // ----------------------------------------------------------------------------------------------
-DWORD	dwAllowTabSwitchLoginJMP = 0x0040B16F;
+
 Other	gOther;
 DWORD	GuildAssistEx_Buff;
 // ----------------------------------------------------------------------------------------------
@@ -38,41 +38,6 @@ Naked(GuildAssistEx)
 	}
 }
 // ----------------------------------------------------------------------------------------------
-Naked(AllowTabSwitchLogin)
-{
-	_asm
-	{
-		PUSH 0
-		MOV EAX, DWORD PTR SS : [EBP - 0x38]
-		MOV ECX, DWORD PTR DS : [EAX + 0x350]
-		MOV EDX, DWORD PTR SS : [EBP - 0x38]
-		MOV EAX, DWORD PTR DS : [EDX + 0x350]
-		MOV EDX, DWORD PTR DS : [EAX]
-		CALL DWORD PTR DS : [EDX + 0x30]
-		// ----
-		MOV EAX, DWORD PTR SS : [EBP-0x38]
-		MOV ECX, DWORD PTR DS : [EAX+0x354]
-		PUSH ECX
-		MOV EDX, DWORD PTR SS : [EBP - 0x38]
-		MOV ECX, DWORD PTR DS : [EDX + 0x350]
-		MOV EAX, DWORD PTR SS : [EBP - 0x38]
-		MOV EDX, DWORD PTR DS : [EAX + 0x350]
-		MOV EAX, DWORD PTR DS : [EDX]
-		CALL DWORD PTR DS : [EAX + 0x58]
-		// ----
-		MOV ECX, DWORD PTR SS : [EBP - 0x38]
-		MOV EDX, DWORD PTR DS : [ECX + 0x350]
-		PUSH EDX
-		MOV EAX, DWORD PTR SS : [EBP - 0x38]
-		MOV ECX, DWORD PTR DS : [EAX + 0x354]
-		MOV EDX, DWORD PTR SS : [EBP - 0x38]
-		MOV EAX, DWORD PTR DS : [EDX + 0x354]
-		MOV EDX, DWORD PTR DS : [EAX]
-		CALL DWORD PTR DS : [EDX + 0x58]
-		// ----
-		JMP dwAllowTabSwitchLoginJMP
-	}
-}
 
 void Other::Load()
 {
@@ -86,14 +51,9 @@ void Other::Load()
 	SetOp((LPVOID)0x00830A56, (LPVOID)this->MoveListInit, ASM::CALL);
 	SetOp((LPVOID)0x00832D88, (LPVOID)this->MoveListInit, ASM::CALL);
 	// ----
-
-	SetRange((LPVOID)0x0040B154, 5, ASM::NOP);
-	SetOp((LPVOID)0x0040B154, AllowTabSwitchLogin, ASM::JMP);
-
 	this->Crack();
 	this->Changer();
 }
-
 // ----------------------------------------------------------------------------------------------
 
 void Other::Crack()
@@ -121,9 +81,7 @@ void Other::Crack()
 
 void Other::Changer()
 {
-	//FIX CTRL FREEZY  | 0052101A  |.  6A 0D         PUSH 0D                                  ; |HookType = 13.
-	SetByte((PVOID)(0x0052101A+1), 0x02);
-
+	VMBEGIN
 	// ----
 #ifdef __ROOT__
 	SetByte((PVOID)0x0095CE90, 0xEB);
@@ -134,7 +92,7 @@ void Other::Changer()
 	// ----
 	if( !g_ScriptEncode.ReadScript("Data\\Custom\\Common.z") )
 	{
-		MessageBoxA(NULL, "file not found", "[Common]", ERROR);
+		MessageBox(NULL, "file not found", "[Common]", ERROR);
 		return;
 	}
 	// ----
@@ -172,12 +130,12 @@ void Other::Changer()
 	SetDword((PVOID)(0x004D1D0B+1), (DWORD)DumpName);
 	SetDword((PVOID)(0x004D9F54+1), (DWORD)ScreenName);
 	// ----
+	VMEND
 }
 // ----------------------------------------------------------------------------------------------
 
 int Other::GameLoad()
 {
-#if defined __BEREZNUK__ || __ALIEN__
 	pGameLoad();
 	// ----
 	switch(pGameResolutionMode)
@@ -193,7 +151,7 @@ int Other::GameLoad()
 		break;
 		// --
 	case 7:
-		pWinWidth		= 1360;
+		pWinWidth		= 1366;
 		pWinHeight		= 768;
 		break;
 		// --
@@ -226,21 +184,14 @@ int Other::GameLoad()
 	SetFloat((LPVOID)oCam_ClipGL, gCamera.Default.ClipGL + 200);
 	// ----
 	return 1;
-#else
-	return pGameLoad();
-#endif
 }
 // ----------------------------------------------------------------------------------------------
 
 void Other::MoveListInit(LPVOID This, LPVOID EDX, int Arg1, int Arg2)
 {
-#if defined __BEREZNUK__ || __ALIEN__
 	GLsizei TempWidth = pWinWidth;
 	pWinWidth = 1280;
 	pMoveListInit(This, Arg1, Arg2);
 	pWinWidth = TempWidth;
-#else
-	return pMoveListInit(This, Arg1, Arg2);
-#endif
 }
 // ----------------------------------------------------------------------------------------------

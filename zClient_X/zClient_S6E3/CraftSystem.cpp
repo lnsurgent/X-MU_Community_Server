@@ -35,7 +35,7 @@ void CraftSystem::ReadStageData(char * File)
 	// ----
 	if( !SMDFile )
 	{
-		MessageBoxA(NULL, "file not found", "[CraftSystem]", ERROR);
+		MessageBox(NULL, "file not found", "[CraftSystem]", ERROR);
 		return;
 	}
 	// ----

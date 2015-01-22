@@ -429,11 +429,11 @@ void User::DrawSome()
 	// ----
 	pGetPosFromAngle(&Angle, &PosX, &PosY);
 	PosX -= (int)floor(LifeBarWidth / (double)2.0);
-	// ---- MOB NAME
+	// ----
 	sprintf(LifeDisplay, "%s", lpObj->Name);
 	pSetTextColor(pTextThis(), 0xFF, 0xE6, 0xD2, 0xFF);
 	pDrawText(pTextThis(), PosX + 2, PosY - 6, LifeDisplay, 0, 0, (LPINT)1, 0);
-	// ---- END MOB NAME
+	// ----
 	pSetBlend(true);
 	glColor4f(0.0, 0.0, 0.0, 0.5);
 	pDrawBarForm((float)(PosX + 1), (float)(PosY + 1), LifeBarWidth + 4.0, 5.0, 0.0, 0);

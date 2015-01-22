@@ -15,7 +15,7 @@ Camera::Camera()
 	this->Default.Zoom		= *(float*)oCam_Zoom;
 	this->Default.RotationY	= *(float*)oCam_RotY;
 	this->Default.RotationZ	= *(float*)oCam_RotZDef;
-	this->Default.PositionZ	= *(float*)oCam_PosZ;
+	this->Default.PositionZ	= *(float*)oCam_PosZDef;
 	this->Default.ClipX		= *(double*)oCam_ClipX;
 	this->Default.ClipY		= *(float*)oCam_ClipY;
 	this->Default.ClipZ		= *(double*)oCam_ClipZ;
@@ -51,14 +51,16 @@ void Camera::Init()
 	SetFloat((LPVOID)oCam_Zoom,		this->Default.Zoom);
 	SetFloat((LPVOID)oCam_RotY,		this->Default.RotationY);
 	SetFloat((LPVOID)oCam_RotZ,		this->Default.RotationZ);
-	SetFloat((LPVOID)oCam_PosZ,		this->Default.PositionZ);
-	SetDouble((LPVOID)oCam_ClipX,	this->Default.ClipX + 500); 
-	SetFloat((LPVOID)oCam_ClipGL,	this->Default.ClipGL + 200);
+	SetDouble((LPVOID)oCam_PosZ,	this->Default.PositionZ);
+	SetDouble((LPVOID)oCam_ClipX,	this->Default.ClipX + 800); 
+	SetFloat((LPVOID)oCam_ClipGL,	this->Default.ClipGL + 500);
 	SetFloat((LPVOID)oCam_ClipY,	this->Default.ClipY);
 	SetDouble((LPVOID)oCam_ClipZ,	this->Default.ClipZ);
 	SetDouble((LPVOID)oCam_ClipX2,	this->Default.ClipX2);
 	SetFloat((LPVOID)oCam_ClipY2,	this->Default.ClipY2);
 	SetFloat((LPVOID)oCam_ClipZ2,	this->Default.ClipZ2);
+	// ----
+
 	// ----
 	this->ZoomPercent = *(float*)oCam_Zoom / ((float)ZOOM_MAX / 100.0f);
 }
@@ -117,13 +119,13 @@ void Camera::Run(MOUSEHOOKSTRUCTEX * Mouse, WPARAM wParam)
 			// ----
 			this->ZoomPercent = *(float*)oCam_Zoom / ((float)ZOOM_MAX / 100.0f);
 			// ----
-			SetDouble((LPVOID)oCam_ClipX, PERCF(PERCF(this->Default.ClipX, 500), this->ZoomPercent));
+			SetDouble((LPVOID)oCam_ClipX, PERCF(PERCF(this->Default.ClipX, 800), this->ZoomPercent));
 			SetFloat((LPVOID)oCam_ClipY, PERCF(PERCF(this->Default.ClipY, 285), this->ZoomPercent));
 			SetDouble((LPVOID)oCam_ClipZ, PERCF(PERCF(this->Default.ClipZ, -395), this->ZoomPercent));
 			SetDouble((LPVOID)oCam_ClipX2, PERCF(PERCF(this->Default.ClipX2, 235), this->ZoomPercent));
 			SetFloat((LPVOID)oCam_ClipY2, PERCF(PERCF(this->Default.ClipY2, 195), this->ZoomPercent));
 			SetFloat((LPVOID)oCam_ClipZ2, PERCF(PERCF(this->Default.ClipZ2, -4000), this->ZoomPercent));
-			SetFloat((LPVOID)oCam_ClipGL, PERCF(PERCF(this->Default.ClipGL, 250), this->ZoomPercent));
+			SetFloat((LPVOID)oCam_ClipGL, PERCF(PERCF(this->Default.ClipGL, 450), this->ZoomPercent));
 		}
 		break;
 		// --

@@ -14,12 +14,6 @@ struct PMSG_BATTLE_LIST
 	BYTE		BattleMapList[MAX_BATTLE_LIST];
 	BYTE		BattleZoneList[MAX_BATTLE_LIST];
 };
-
-struct SENDRECONNECTSTATUS
-{
-	PBMSG_HEAD2 h;
-	int value;
-};
 // ----------------------------------------------------------------------------------------------
 
 #pragma pack(push, 1)
@@ -92,7 +86,7 @@ public:
 	static void	SetEventEffect(int PreviewStruct);
 	static bool	IsMasterClass(BYTE Class);
 	static void	DrawPartyHP();
-	static void		DrawSome();
+	void		DrawSome();
 	// ----
 	lpCharObj	lpPlayer;
 	lpViewObj	lpViewPlayer;

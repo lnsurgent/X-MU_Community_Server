@@ -181,7 +181,10 @@ namespace eItemOption
 		DamageByLevel	= 94,		//-> Increase Damage +level/20
 		IncreaseDamage	= 95,		//-> Increase Damage +%d%%
 		IncreaseWizardry= 96,		//-> Increase Wizardry Dmg +level/20
+		IncreaseWizardryDmg = 97,	//-> Increase Wizardry Dmg +2%
 		IncreaseSpeed	= 98,		//-> Increase Attacking(Wizardry)speed +%d
+		LifePerMob		= 99,		//-> Increases acquisition rate of Life after hunting monsters +life/8
+		ManaPerMob		= 100,		//-> Increases acquisition rate of Mana after hunting monsters +Mana/8
 		IgnorOpDefense	= 103,
 		ReturnAttack	= 106,		//-> Return's the enemy's attack power in <N>%
 		CompleteLife	= 107,		//-> Complete recovery of life in <N>% rate

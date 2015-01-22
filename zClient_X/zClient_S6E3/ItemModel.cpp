@@ -39,7 +39,7 @@ void ItemModel::Read(char * File)
 	// ----
 	if( !g_ScriptEncode.ReadScript(File) )
 	{
-		//MessageBoxA(NULL, "file not found", "[ItemModel]", ERROR);
+		//MessageBox(NULL, "file not found", "[ItemModel]", ERROR);
 		return;
 	}
 	// ----

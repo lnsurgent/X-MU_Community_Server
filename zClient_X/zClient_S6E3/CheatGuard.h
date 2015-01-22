@@ -77,6 +77,3 @@ public:
 	// ----
 }; extern CheatGuard gCheatGuard;
 // ----------------------------------------------------------------------------------------------
-
-void ConnectToServer(void);
-int ServerConnect ();

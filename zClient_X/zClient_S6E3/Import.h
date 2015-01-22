@@ -1,13 +1,5 @@
 #pragma once
-// Info Helper --------------------------------------------------------------------------------
-// Comparacao do level do char com 50
-// 0095CD6D  |.  83F9 50       CMP ECX,50
-// Offset Level Caixa
-// 0095CD93  |.  6A 50         PUSH 50
-// Offset text.bmd
-// 0095CD95  |.  68 F50D0000   PUSH 0DF5                                ; /Arg1 = 00000DF5
-// --------------------------------------------------------------------------------------------
-
+// ----------------------------------------------------------------------------------------------
 
 #include "stdafx.h"
 // ----------------------------------------------------------------------------------------------
@@ -128,7 +120,8 @@
 
 //-> Other
 #define oCam_Zoom				0x0D27BFC	//1037DB0
-#define oCam_PosZ				0x0D255AC	//1031A64
+#define oCam_PosZDef			0x0D255AC	// Restore PosZ
+#define oCam_PosZ				0x0D255A0	// PosZ
 #define oCam_RotZ				0x87933D8	//8B4ACC8
 #define oCam_RotZDef			0x0D27B78	//1033AB0
 #define oCam_RotY				0x0D27B88	//1033AC0

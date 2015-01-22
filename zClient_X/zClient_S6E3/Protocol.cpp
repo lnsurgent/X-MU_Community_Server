@@ -11,6 +11,8 @@
 #include "ConnectEx.h"
 #include "ChatExpanded.h"
 #include "VisualFix.h"
+#include "OffTrade.h"
+#include "Interface.h"
 // ----------------------------------------------------------------------------------------------
 
 Protocol	gProtocol;
@@ -164,6 +166,11 @@ void Protocol::DataRecv(DWORD Case, LPBYTE Data, int Len, int aIndex)
 	{
 		switch(BYTE(Case))
 		{
+			case 0x3F:
+			{
+				gOffTrade.RecvPShop((PMSG_ANS_BUYLIST_FROM_PSHOP *)Data);
+			}
+			break;
 		case 0xFD:
 			{
 				gNewsBoard.OpenMain((NEWS_ANS_TITLES*)Data);
@@ -173,6 +180,13 @@ void Protocol::DataRecv(DWORD Case, LPBYTE Data, int Len, int aIndex)
 		case 0xFE:
 			{
 				gNewsBoard.OpenItem((NEWS_ANS_NEWS*)Data);
+			}
+			break;
+		case 0xFF:
+			{
+				MIN_LEVEL_MUHELPER * lpMsg = (MIN_LEVEL_MUHELPER*)Data;
+				SetByte((PVOID)(0x0095CD6D+2), lpMsg->lvl); //Min level Req to use Helper
+				SetByte((PVOID)(0x0095CD93+1), lpMsg->lvl); //MuHelper Box error
 			}
 			break;
 		}

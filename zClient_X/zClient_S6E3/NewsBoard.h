@@ -56,6 +56,12 @@ struct NEWS_ANS_NEWS
 	BYTE	ID;
 	NEWS_DATA News;
 };
+
+struct MIN_LEVEL_MUHELPER
+{
+	PWMSG_HEAD h;
+	BYTE	lvl;
+};
 #pragma pack(pop)
 // -------------------------------------------------------------------------------
 

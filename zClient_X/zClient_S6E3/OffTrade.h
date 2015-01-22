@@ -17,6 +17,10 @@ struct PMSG_ANS_BUYLIST_FROM_PSHOP
 #define ZEN_SHOP	".::ZEN SHOP::."
 #define WCOIN_SHOP	".::WCOIN SHOP::."
 #define SOUL_SHOP	".::SOUL SHOP::."
+#define BLESS_SHOP	".::BLESS SHOP::."
+#define CHAOS_SHOP	".::CHAOS SHOP::."
+#define LIFE_SHOP	".::LIFE SHOP::."
+#define CREATION_SHOP	".::CREATION SHOP::."
 
 class cOffTrade
 {

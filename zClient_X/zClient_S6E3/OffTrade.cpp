@@ -21,6 +21,22 @@ void cOffTrade::RecvPShop(PMSG_ANS_BUYLIST_FROM_PSHOP *Data)
 	{
 		this->TypeShop = 2;
 	}
+	else if(!strcmp(Data->szPShopText,BLESS_SHOP))
+	{
+		this->TypeShop = 3;
+	}
+	else if(!strcmp(Data->szPShopText,CHAOS_SHOP))
+	{
+		this->TypeShop = 4;
+	}
+	else if(!strcmp(Data->szPShopText,LIFE_SHOP))
+	{
+		this->TypeShop = 5;
+	}
+	else if(!strcmp(Data->szPShopText,CREATION_SHOP))
+	{
+		this->TypeShop = 6;
+	}
 	else
 	{
 		this->TypeShop = 0;
@@ -37,6 +53,22 @@ void cOffTrade::ShowPrice(DWORD a1, const char *a2, char *Price)
 	{
 		pShowPrice(a1,"Selling Price: %s Jewel Of Soul",Price);  
 	}
+	else if(gOffTrade.TypeShop == 3)
+	{
+		pShowPrice(a1,"Selling Price: %s Jewel Of Bless",Price);  
+	}
+	else if(gOffTrade.TypeShop == 4)
+	{
+		pShowPrice(a1,"Selling Price: %s Jewel Of Chaos",Price);  
+	}
+	else if(gOffTrade.TypeShop == 5)
+	{
+		pShowPrice(a1,"Selling Price: %s Jewel Of Life",Price);  
+	}
+	else if(gOffTrade.TypeShop == 6)
+	{
+		pShowPrice(a1,"Selling Price: %s Jewel Of Creation",Price);  
+	}
 	else
 	{
 		pShowPrice(a1,"Selling Price: %s Zen",Price);  
@@ -52,6 +84,22 @@ void cOffTrade::ShowTwoString(DWORD a1, const char *a2)
 	else if(gOffTrade.TypeShop == 2)
 	{
 		pShowPrice(a1,"You are short of Soul");  
+	}
+	else if(gOffTrade.TypeShop == 3)
+	{
+		pShowPrice(a1,"You are short of Bless");  
+	}
+	else if(gOffTrade.TypeShop == 4)
+	{
+		pShowPrice(a1,"You are short of Chaos");  
+	}
+	else if(gOffTrade.TypeShop == 5)
+	{
+		pShowPrice(a1,"You are short of Life");  
+	}
+	else if(gOffTrade.TypeShop == 6)
+	{
+		pShowPrice(a1,"You are short of Creation");  
 	}
 	else
 	{

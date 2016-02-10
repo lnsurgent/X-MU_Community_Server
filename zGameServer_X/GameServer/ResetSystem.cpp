@@ -561,7 +561,11 @@ void ResetSystem::FinishResetReq(LPOBJ lpUser)
 		lpUser->Dexterity	= DCInfo.DefClass[lpUser->Class].Dexterity;
 		lpUser->Energy		= DCInfo.DefClass[lpUser->Class].Energy;
 		lpUser->Vitality	= DCInfo.DefClass[lpUser->Class].Vitality;
-		lpUser->Leadership	= DCInfo.DefClass[lpUser->Class].Leadership + this->m_BonusCommand;
+		//Check fix Command for Other Class
+		if (lpUser->Class == CLASS_DARKLORD)
+		{
+			lpUser->Leadership = DCInfo.DefClass[lpUser->Class].Leadership + (lpUser->Reset * this->m_BonusCommand);
+		}
 	}
 	// ----
 	if( this->m_MarlonReset )

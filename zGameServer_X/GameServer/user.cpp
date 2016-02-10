@@ -16749,23 +16749,24 @@ bool TestFrustrum2(int x, int y, int aIndex)
 
 BOOL gObjCheckViewport(int aIndex, int x, int y)
 {
+	int Distance = GetPrivateProfileInt("GameServerInfo", "Distance", 15, gDirPath.GetNewPath("commonserver.cfg")); // need add in data/commonserver.cfg 
+	// ---
 	LPOBJ lpObj = &gObj[aIndex];
-
-	if(x < lpObj->X - 15  || x > lpObj->X + 15 || y < lpObj->Y - 15 || y > lpObj->Y + 15)
+	// ---
+	if (x < lpObj->X - Distance || x > lpObj->X + Distance || y < lpObj->Y - Distance || y > lpObj->Y + Distance)
 	{
 		return false;
 	}
 
-	int j = 3;
-
-	for(int i = 0; i < 4; j = i, i++)
-	{
-		int frustrum = (lpObj->FrustrumX[i]- x) * (lpObj->FrustrumY[j]-y) - (lpObj->FrustrumX[j]-x) * (lpObj->FrustrumY[i]-y);
-		if(frustrum < 0)
-		{
-			return false;
-		}
-	}
+	//int j = 3;
+	//for(int i = 0; i < 4; j = i, i++)
+	//{
+	//	int frustrum = (lpObj->FrustrumX[i]- x) * (lpObj->FrustrumY[j]-y) - (lpObj->FrustrumX[j]-x) * (lpObj->FrustrumY[i]-y);
+	//	if(frustrum < 0)
+	//	{
+	//		return false;
+	//	}
+	//}
 	return true;
 }
 

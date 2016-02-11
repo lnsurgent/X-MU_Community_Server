@@ -87,7 +87,7 @@ int ChatFilter::StringToUTF8(CString & Text)
 
 int ChatFilter::CheckText(char * Text)
 {
-	return 2;
+	//return 2;
 	// ----
 	if( (Text == NULL) || (strcmp(Text, "") == 0) )
 	{
